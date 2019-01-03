@@ -9,7 +9,7 @@ import { MapPage } from "./../pages/map/map";
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = MapPage;
+  rootPage: any = HomePage;
 
   constructor(
     platform: Platform,
