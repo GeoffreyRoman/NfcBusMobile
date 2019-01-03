@@ -22,14 +22,23 @@ page-home {
     margin-top: 20px;
     margin-bottom: 30px;
   }
+
+  @media (min-height: 700px) {
+    .title {
+      margin-top: 8.5rem !important;
+    }
+  }
+
   h2 {
     font-weight: bold;
     text-align: center;
     font-size: 45px;
   }
 
-  .title {
-    margin-top: 8.5rem !important;
+  @media (max-height: 600px) {
+    h2 {
+      font-size: 35px;
+    }
   }
 
   h3 {
