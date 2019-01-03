@@ -1,11 +1,39 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  <img src="assets/imgs/NFC.png" />
+  <h2 class="title">Tagger une borne</h2>
+
+  <img src="assets/imgs/NFC.png" class="nfcImg" />
+
+  <!-- Bouton à enlever après -->
   <button (click)="next()">Map</button>
-  
+
+  <h2 class="or">OU</h2>
+
+  <div><h3>Séléctionnez votre arrêt :</h3></div>
+
+  <!-- <div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text"></div>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="inlineFormInputGroupUsername"
+        placeholder="Magnan"
+      />
+    </div>
+  </div> -->
+
+  <div class="form">
+    <input
+      class="input is-large"
+      type="email"
+      placeholder="Magnan"
+      [(ngModel)]="busStop"
+    />
+  </div>
+
+  <button ion-button block [disabled]="!busStop">
+    Choissir sa destination
+  </button>
 </ion-content>
