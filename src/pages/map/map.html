@@ -4,16 +4,31 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>map</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-    <div id="mapid"></div>
+<ion-content>
+  <div class="returnButton">
+    <button><i class="fas fa-chevron-left"></i></button>
+  </div>
+  <div class="buttons">
+    <button class="left"><i class="fas fa-redo"></i></button>
+    <button class="middle"><i class="fas fa-search"></i></button>
+    <button class="right"><i class="fas fa-ellipsis-h"></i></button>
+  </div>
+  <div id="mapid"></div>
+  <div class="resultConent">
+    <!-- Timer -->
+    <div class="timer">
+      <div class="text">
+        <div class="number">25</div>
+        <!-- New line -->
+        <div class="min">min</div>
+      </div>
+    </div>
+    <!-- Iteneraire -->
+    <div class="iteneraire">
+      <div class="depart">Acropolis</div>
+      <img src="./assets/imgs/arrow.png" class="arrow" />
+      <div class="destination">Gare Thiers</div>
+    </div>
+  </div>
 </ion-content>
