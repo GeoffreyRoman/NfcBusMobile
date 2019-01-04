@@ -45,4 +45,8 @@ export class MapPage {
       document.getElementById("mapid").style.position = "sticky";
     }
   }
+
+  closeInfo() {
+    document.getElementById("info").style.display = "none";
+  }
 }

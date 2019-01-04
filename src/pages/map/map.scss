@@ -94,4 +94,41 @@ page-map {
   .iteneraire .arrow {
     width: 100px;
   }
+
+  #info {
+    width: 200px;
+    height: 50px;
+    background-color: #4cd2e0;
+    position: fixed;
+    z-index: 20;
+    top: 185px;
+    left: 0px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+
+  #info .closeButton {
+    color: black;
+    width: 35px;
+    float: right;
+    margin-top: -34px;
+    margin-right: 10px;
+  }
+
+  #info .adresse {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  #info .distance {
+    color: white;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    // font-style: italic;
+  }
 }
