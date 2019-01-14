@@ -4,8 +4,11 @@ page-map {
   }
   #mapid {
     width: 100%;
-    height: 50%;
-    position: sticky;
+    height: 75%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
 
   .resultConent {
@@ -16,7 +19,7 @@ page-map {
     margin-left: 50%;
     transform: translate(-50%, -50%);
     width: 150px;
-    height: 150px;
+    max-height: 150px;
     border: 5px solid #4cd2e0;
     border-radius: 50%;
     text-align: center;
@@ -79,7 +82,7 @@ page-map {
 
   .returnButton button {
     width: 30px;
-    height: 30px;
+    max-height: 30px;
     border-radius: 50%;
     background-color: white;
     border: 2px solid gray;
@@ -89,6 +92,7 @@ page-map {
     text-align: center;
     font-weight: bold;
     font-size: 35px;
+    
   }
 
   .iteneraire .arrow {
@@ -97,7 +101,7 @@ page-map {
 
   #info {
     width: 200px;
-    height: 50px;
+    max-height: 50px;
     background-color: #4cd2e0;
     position: fixed;
     z-index: 20;
