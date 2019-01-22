@@ -26,7 +26,7 @@ export class HomePage {
 
 
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.listener = this.nfc.addNdefListener(() => {
       console.log('successfully attached ndef listener');
     }, (err) => {
@@ -41,7 +41,7 @@ export class HomePage {
 
 
 
-        let message = this.ndef.textRecord('{"idStop":911}');
+        let message = this.ndef.textRecord('{"idStop":5004}');
         this.nfc.write([message]).then(() => { console.log('Message transfere'); }
         ).catch(() => {
           console.log('error');

@@ -20,11 +20,20 @@ export class MapPage {
   map;
   private markerStop;
   private idStop;
+  private address = "localhost";
+  private temps: any = "";
+  private depart = "Station de départ";
+  private arrive = "Station d'arrivée";
+  private busno = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
+
+  }
 
   ionViewDidLoad() {
 
+
+    this.temps = "...";
     this.idStop = this.navParams.data['idStop'];
     console.log("Numero de depart : " + this.idStop);
 
@@ -37,7 +46,7 @@ export class MapPage {
   loadMap() {
     this.map = L.map("mapid");
     this.map.on("load", this.onMapLoad);
-    this.map.setView([43.710175, 7.261953], 16);
+    this.map.setView([43.6989557997, 7.2696800568], 16);
 
     "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
     L.tileLayer(
@@ -49,7 +58,8 @@ export class MapPage {
       }
     ).addTo(this.map);
 
-    this.http.get("http://82.253.136.83:3000/stop?id=" + this.idStop).subscribe(
+    // 82.253.136.83
+    this.http.get("http://" + this.address + ":3000/stop?id=" + this.idStop).subscribe(
       response => {
         console.log(response);
 
@@ -57,6 +67,7 @@ export class MapPage {
         let long = response["result"][0]["stop_lon"];
         let name = response["result"][0]["stop_name"];
         this.addMarkerToMap(lat, long, name);
+        this.depart = name;
       }
     )
 
@@ -67,10 +78,31 @@ export class MapPage {
 
   }
 
+  getTime(dep: string) {
+
+    let res = "";
+    var timeStart = new Date();
+
+    var timeEnd = new Date("01/01/2007 " + dep)
+    let hour = timeEnd.getHours() - timeStart.getHours();
+    let minutes = timeEnd.getMinutes() - timeStart.getMinutes();
+    if (hour > 0) {
+      res += hour + "h"
+    }
+    res += minutes;
+
+    return res;
+  }
 
 
   addMarkerToMap(lat: number, long: number, stop_name: string) {
     L.marker([lat, long]).bindPopup('<b>Arret</b> </br>' + stop_name)
+      .openPopup().addTo(this.map);
+  }
+
+  addMarkerStopToMap(lat: number, long: number, stop_name: string) {
+    this.markerStop = L.marker([lat, long]);
+    this.markerStop.bindPopup('<b>Arret</b> </br>' + stop_name)
       .openPopup().addTo(this.map);
   }
 
@@ -80,9 +112,14 @@ export class MapPage {
       .setContent("On y va ? " + '<ion-button></ion-button>')
       .openOn(this.map);
 
-    console.log("http://192.168.1.14:3000/nearestBusStop?long=" + e.latlng.lng + "&lat=" + e.latlng.lat + "&stop=911");
+    console.log("http://" + this.address + ":3000/nearestBusStop?long=" + e.latlng.lng + "&lat=" + e.latlng.lat + "&stop=911");
+    // http://192.168.1.14:3000/nearestBusStop    
 
-    this.http.get("http://82.253.136.83:3000/nearestBusStop?long=" + e.latlng.lng + "&lat=" + e.latlng.lat + "&stop=911").subscribe(
+    this.temps = "...";
+
+    '<img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/35771931234507.564a1d2403b3a.gif" alt="loading">'
+    this.arrive = "...";
+    this.http.get("http://" + this.address + ":3000/nearestBusStop?long=" + e.latlng.lng + "&lat=" + e.latlng.lat + "&stop=911").subscribe(
       (response) => {
         console.log(response);
         if (this.markerStop) {
@@ -90,9 +127,15 @@ export class MapPage {
         }
         let lat = response["result"]["stop_lat"];
         let long = response["result"]["stop_lon"];
-        this.markerStop = L.marker([lat, long]);
-        this.markerStop.addTo(this.map);
+        let name = response["result"]["stop_name"];
+        this.addMarkerStopToMap(lat, long, name);
 
+
+        this.busno = response["result"]["route_short_name"];
+        this.temps = this.getTime(response["result"]["departure_time"]);
+        this.arrive = name;
+
+        this.map.closePopup();
 
       }
     );

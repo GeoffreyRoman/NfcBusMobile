@@ -6,38 +6,32 @@
 -->
 
 <ion-content>
-  <div id="info">
-    <!-- Adresse -->
-    <div class="adresse">3 rue scaliero</div>
-    <!-- Distance -->
-    <div class="distance">30 KM</div>
-    <a class="closeButton" (click)="closeInfo()"
-      ><img src="assets/imgs/close.png"
-    /></a>
-  </div>
+
   <div class="returnButton">
-    <button><i class="fas fa-chevron-left"></i></button>
+
+    <button (click)="goback()"><i class="fas fa-chevron-left"></i></button>
   </div>
-  <div class="buttons">
-    <button class="left"><i class="fas fa-redo"></i></button>
-    <button class="middle"><i class="fas fa-search"></i></button>
-    <button class="right"><i class="fas fa-ellipsis-h"></i></button>
-  </div>
+
   <div id="mapid"></div>
   <div class="resultConent">
     <!-- Timer -->
     <div class="timer">
-      <div class="text">
-        <div class="number">25</div>
+      <div class="text" *ngIf="temps">
+        <div class="min">attente</div>
+        <div class="number temps">
+
+          {{temps}}</div>
         <!-- New line -->
         <div class="min">min</div>
       </div>
     </div>
     <!-- Iteneraire -->
     <div class="iteneraire">
-      <div class="depart">Acropolis</div>
+      <div class="depart">{{depart}}</div>
+
+      <span class="busno">{{busno}}</span>
       <img src="./assets/imgs/arrow.png" class="arrow" />
-      <div class="destination">Gare Thiers</div>
+      <div class="destination">{{arrive}}</div>
     </div>
   </div>
 </ion-content>
